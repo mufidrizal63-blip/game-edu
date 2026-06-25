@@ -1,4 +1,4 @@
-const CACHE_NAME = 'edugame-v4';
+const CACHE_NAME = 'edugame-v5';
 const ASSETS = [
   './',
   './EduGame.html',
@@ -73,7 +73,22 @@ self.addEventListener('fetch', e => {
     return;
   }
 
-  // App assets — cache first, network fallback
+  // For HTML document — Network First, fallback to cache
+  if (e.request.destination === 'document' || url.pathname.endsWith('.html')) {
+    e.respondWith(
+      fetch(e.request).then(response => {
+        const clone = response.clone();
+        caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
+        return response;
+      }).catch(() => caches.match(e.request).then(cached => {
+        if (cached) return cached;
+        return caches.match('./EduGame.html');
+      }))
+    );
+    return;
+  }
+
+  // App assets (images, js, css) — cache first, network fallback
   e.respondWith(
     caches.match(e.request).then(cached => {
       if (cached) return cached;
@@ -83,11 +98,6 @@ self.addEventListener('fetch', e => {
           caches.open(CACHE_NAME).then(cache => cache.put(e.request, clone));
         }
         return response;
-      }).catch(() => {
-        // If offline and not in cache, return main page for navigation requests
-        if (e.request.destination === 'document') {
-          return caches.match('./EduGame.html');
-        }
       });
     })
   );

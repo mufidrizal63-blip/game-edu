@@ -253,12 +253,12 @@ body{font-family:'Fredoka','Segoe UI',sans-serif;color:#2d3436;user-select:none;
 .wrt-color-dot.active{border-color:#2d3436;box-shadow:0 0 0 3px rgba(45,52,54,.3),0 3px 8px rgba(0,0,0,.15)}
 
 @media(max-width:650px){
-  .home-grid{grid-template-columns:1fr;gap:12px;padding:0 8px}
-  .home-card{display:grid;grid-template-columns:auto 1fr;grid-template-areas:"icon label" "icon desc";text-align:left;padding:16px 20px;border-radius:20px;align-items:center;column-gap:16px}
-  .home-card:hover{transform:translateY(-4px)}
-  .home-card .h-emoji{grid-area:icon;margin:0;font-size:2.8rem}
-  .home-card .h-label{grid-area:label;font-size:1.15rem;align-self:end;margin-bottom:1px}
-  .home-card .h-desc{grid-area:desc;font-size:0.85rem;margin-top:1px;align-self:start}
+  .home-grid{grid-template-columns:repeat(3,1fr);gap:10px;padding:0 5px}
+  .home-card{display:flex;flex-direction:column;text-align:center;padding:14px 6px;border-radius:18px;align-items:center;justify-content:center}
+  .home-card:hover{transform:translateY(-2px)}
+  .home-card .h-emoji{font-size:2.4rem;margin:0 0 6px 0;grid-area:auto}
+  .home-card .h-label{font-size:0.85rem;line-height:1.2;margin:0;grid-area:auto}
+  .home-card .h-desc{display:none}
 
   .q-text{font-size:2.5rem}
   .opt-btn{font-size:1.4rem;padding:.9rem}

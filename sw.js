@@ -1,4 +1,4 @@
-const CACHE_NAME = 'edugame-v3';
+const CACHE_NAME = 'edugame-v4';
 const ASSETS = [
   './',
   './EduGame.html',
